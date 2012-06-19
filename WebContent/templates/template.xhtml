@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j" 
+	xmlns:rich="http://richfaces.org/rich">
+		<h:head>
+			<title>Prototype WebDevelopment</title>
+			<h:outputStylesheet name="/css/client.css" library="css"></h:outputStylesheet>
+			<ui:insert name="head" />
+		</h:head>
+		<h:body>
+			<div style="border: 1px solid;">
+				<div class="header" align="center">
+					<ui:include src="menu.xhtml"/>
+				</div>
+					
+				<div class="body">
+					<h:messages id="messages" globalOnly="true" styleClass="message" errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg" rendered="#{showGlobalMessages != 'false'}" />
+					<ui:insert name="body" />
+					<br /> <br />
+				</div>
+				
+				<div class="footer" align="center">
+					<ui:insert name="footer" />
+					<rich:toolbar height="26px">
+						<rich:toolbarGroup location="right">
+							<h:panelGroup>
+								<p align="center">&nbsp;Powered by &nbsp;PRIM FACES </p>
+							</h:panelGroup>
+						</rich:toolbarGroup>
+					</rich:toolbar>
+				</div>
+			</div>
+		</h:body>
+	</html>

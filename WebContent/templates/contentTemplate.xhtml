@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" lang="en">
+	<h:head>
+		<title>My Facelets Page</title>
+		<meta http-equiv="keywords" content="enter,your,keywords,here" />
+		<meta http-equiv="description"
+			content="A short description of this page." />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<h:outputStylesheet name="/css/client.css" library="css"></h:outputStylesheet>
+		<script>jsf.ajax.addOnEvent(allAjaxOnEvent);</script>
+		<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+	</h:head>
+	<h:body>
+		<h:panelGroup id="requestWrapper" layout="block">
+			<h3>Request - 
+			<h:outputLabel>
+				<ui:insert name="method">No method selected.</ui:insert>
+			</h:outputLabel>
+			</h3>
+			<ui:insert name="request">Select a method to invoke.</ui:insert>
+		</h:panelGroup>
+		<h:panelGroup id="responseWrapper" layout="block" style="display:none;">
+			<h3>Response - 
+			<h:outputLabel>
+				<ui:insert name="method">No method selected.</ui:insert>
+			</h:outputLabel>
+			</h3>
+			<ui:insert name="response">Invoke method to see response.</ui:insert>
+		</h:panelGroup>
+	</h:body>
+</html>

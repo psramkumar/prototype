@@ -1,0 +1,60 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j">
+<h:head>
+	<h:outputStylesheet>
+		.whiteFont{   color:white;	}
+	</h:outputStylesheet>
+</h:head>
+<h:body>
+	<h:form id="menuform">
+		<rich:toolbar height="26px">
+			<rich:toolbarGroup location="left">
+				<rich:menuItem mode="ajax" onclick="document.location.href='/prototype/index.do'">
+					<h:graphicImage value="/img/home_icon.png" alt="Home" height="26"  />
+					<h:outputText value="Home"/>
+				</rich:menuItem>
+				<rich:dropDownMenu mode="ajax" label="Admin" title="Admin">
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:graphicImage value="/img/icon_admin.png" alt="Admin"	height="26" />
+							<h:outputText value="Admin"/>
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem submitMode="client"
+						onclick="document.location.href='http://jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=261'"
+						rendered="#{credentials.loggedIn}">
+						<h:outputText value="Jboss Community 1"/>
+					</rich:menuItem>
+					<rich:menuItem submitMode="client"
+						onclick="document.location.href='http://jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=261'"
+						rendered="#{credentials.loggedIn}">
+						<h:outputText value="Jboss Solutions"/>
+					</rich:menuItem>
+
+				</rich:dropDownMenu>
+
+			</rich:toolbarGroup>
+			<rich:toolbarGroup location="right">
+				<rich:menuItem mode="ajax" rendered="#{credentials.loggedIn}"
+					action="#{credentials.logout}"
+					oncomplete="document.location.href='/prototype/index.do'">
+					<h:graphicImage value="/img/Log-Out-icon.png" alt="Logout" height="26" />
+					<h:outputText value="Logout"/>
+				</rich:menuItem>
+				<rich:menuItem mode="ajax" rendered="#{not credentials.loggedIn}"
+					onclick="document.location.href='/prototype/login.do'">
+					<h:graphicImage value="/img/1856665992.png" alt="Login" height="26" />
+					<h:outputText value="Login"/>
+				</rich:menuItem>
+			</rich:toolbarGroup>
+		</rich:toolbar>
+
+	</h:form>
+</h:body>
+</html>

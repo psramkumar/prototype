@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:p="http://primefaces.org/ui" >
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="head">
+	
+	</ui:define>
+	
+	<ui:define name="body">
+		<div align="center">
+			<h:panelGroup id="loginPanel" layout="block" rendered="#{!credentials.loggedIn}">
+				<h:form>
+					<h:panelGrid>
+						<h:messages id="loginErr"  globalOnly="false" errorClass="error" warnClass="warn" infoClass="info"/>
+					</h:panelGrid>
+				    <h:panelGrid columns="2">
+				        <h:outputLabel for="username">Username:</h:outputLabel>
+				        <p:inputText id="username" value="#{credentials.username}" label="Username" required="true" requiredMessage="UserName is Required"/> 
+				        <h:outputLabel for="password">Password:</h:outputLabel>
+				        <p:keyboard  id="password" value="#{credentials.password}" password="true" required="true" requiredMessage="Password is Required"/>
+		        		<h:outputText value="&nbsp;" />
+		        		<h:commandButton value="Login Now" action="#{credentials.login}" label="Log Me In!" title="Log Me In!" />  
+				    </h:panelGrid>
+				</h:form>
+			</h:panelGroup>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>
