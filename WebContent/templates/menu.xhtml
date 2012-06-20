@@ -16,9 +16,8 @@
 		<rich:toolbar height="26px">
 			<rich:toolbarGroup location="left">
 				<h:commandButton action="home" value="Verizon.com" image="/img/verizon_small.gif" />
-				<rich:menuItem mode="ajax" 
-					onclick="document.location.href='home.do'">
-					<h:graphicImage value="/img/home_icon.png" alt="Home" height="26"  />
+				<rich:menuItem mode="ajax">
+					<h:commandButton action="home" image="/img/home_icon.png" />
 					<h:outputText value="Home"/>
 				</rich:menuItem>
 				<rich:dropDownMenu mode="ajax" label="Admin" title="Admin">
