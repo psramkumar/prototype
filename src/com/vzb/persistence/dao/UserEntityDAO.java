@@ -32,12 +32,7 @@ public class UserEntityDAO implements Serializable {
 	
 	@SuppressWarnings("unchecked")
 	public List<UserProfile> getResultList(){
-		if(em ==null){
-			System.out.println("Entety Manager Null");
-		}else{
-			System.out.println(em.getProperties());
-		}
-		return em.createQuery("select userProfile from UserProfile userProfile").getResultList();
+		return em.createQuery(getEjbql()).getResultList();
 	}
 
 }

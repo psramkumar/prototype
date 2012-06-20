@@ -33,7 +33,14 @@
 					<f:facet name="header">Password</f:facet>
 					<h:outputText value="#{user.password}" />
 				</p:column>
+				<p:column style="text-align:center;">
+					<f:facet name="header">Action</f:facet>
+						<h:commandButton action="home" image="/img/edit.gif" />
+						<h:commandButton action="home" image="/img/delete.gif" />
+				</p:column>
 			</p:dataTable>
+			<br clear="none"/>
+			<h:commandButton action="home" value="Add New" />
 		</h:form>
 
 	</ui:define>
