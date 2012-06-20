@@ -14,7 +14,7 @@ public abstract class JPABaseDao<E, ID extends Serializable> {
 
 	public static String JNDI_NAME = JPABaseDao.class.getName();
 
-	@PersistenceContext(unitName = "MySQLDS")
+	@PersistenceContext
 	protected EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")
@@ -49,11 +49,12 @@ public abstract class JPABaseDao<E, ID extends Serializable> {
 
 	@SuppressWarnings("unchecked")
 	public void initResult() throws Exception {
-		if(entityManager ==null) return;
+		if(entityManager == null) return;
 		Query query = entityManager.createQuery(ejbQL);
 		if (maxResult != null) {
 			query.setMaxResults(maxResult);
 		}
 		setResultList(query.getResultList());
+		System.out.println("JPABaseDao.initResult()"+query.getResultList().size());
 	}
 }

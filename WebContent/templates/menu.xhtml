@@ -15,7 +15,8 @@
 	<h:form id="menuform">
 		<rich:toolbar height="26px">
 			<rich:toolbarGroup location="left">
-				<rich:menuItem mode="ajax" onclick="document.location.href='/prototype/index.do'">
+				<rich:menuItem mode="ajax" 
+					onclick="document.location.href='home.do'">
 					<h:graphicImage value="/img/home_icon.png" alt="Home" height="26"  />
 					<h:outputText value="Home"/>
 				</rich:menuItem>
@@ -27,27 +28,27 @@
 						</h:panelGroup>
 					</f:facet>
 					<rich:menuItem submitMode="client"
-						onclick="document.location.href='http://jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=261'"
-						rendered="#{credentials.loggedIn}">
-						<h:outputText value="Jboss Community 1"/>
+						onclick="document.location.href='userHome.do'"
+						rendered="#{identity.loggedIn}">
+						<h:outputText value="UserProfiles"/>
 					</rich:menuItem>
 					<rich:menuItem submitMode="client"
 						onclick="document.location.href='http://jboss.com/index.html?module=bb&amp;op=viewforum&amp;f=261'"
-						rendered="#{credentials.loggedIn}">
+						rendered="#{identity.loggedIn}">
 						<h:outputText value="Jboss Solutions"/>
 					</rich:menuItem>
 
 				</rich:dropDownMenu>
 
 			</rich:toolbarGroup>
-			<rich:toolbarGroup location="right">
-				<rich:menuItem mode="ajax" rendered="#{credentials.loggedIn}"
-					action="#{credentials.logout}"
-					oncomplete="document.location.href='/prototype/index.do'">
+			<rich:toolbarGroup location="right">Welcome! <b>#{identity.user.id}</b>
+				<rich:menuItem mode="ajax" rendered="#{identity.loggedIn}"
+					action="#{identity.logout}"
+					oncomplete="document.location.href='/prototype/home.do'">
 					<h:graphicImage value="/img/Log-Out-icon.png" alt="Logout" height="26" />
 					<h:outputText value="Logout"/>
 				</rich:menuItem>
-				<rich:menuItem mode="ajax" rendered="#{not credentials.loggedIn}"
+				<rich:menuItem mode="ajax" rendered="#{not identity.loggedIn}"
 					onclick="document.location.href='/prototype/login.do'">
 					<h:graphicImage value="/img/1856665992.png" alt="Login" height="26" />
 					<h:outputText value="Login"/>

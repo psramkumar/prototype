@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="head">
+
+	</ui:define>
+
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:dataTable id="basic" var="user" value="#{userEntityDAO.resultList}">
+				<p:column id="modelHeader">
+					<f:facet name="header">UserId</f:facet>
+					<h:outputText value="#{user.guid}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">UserName</f:facet>
+					<h:outputText value="#{user.userName}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Eamil Id</f:facet>
+					<h:outputText value="#{user.emailAddress}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Password</f:facet>
+					<h:outputText value="#{user.password}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="footer">
+
+	</ui:define>
+</ui:composition>
+</html>

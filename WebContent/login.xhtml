@@ -14,7 +14,7 @@
 	
 	<ui:define name="body">
 		<div align="center">
-			<h:panelGroup id="loginPanel" layout="block" rendered="#{!credentials.loggedIn}">
+			<h:panelGroup id="loginPanel" layout="block" rendered="#{not identity.loggedIn}">
 				<h:form>
 					<h:panelGrid>
 						<h:messages id="loginErr"  globalOnly="false" errorClass="error" warnClass="warn" infoClass="info"/>
@@ -25,7 +25,9 @@
 				        <h:outputLabel for="password">Password:</h:outputLabel>
 				        <p:keyboard  id="password" value="#{credentials.password}" password="true" required="true" requiredMessage="Password is Required"/>
 		        		<h:outputText value="&nbsp;" />
-		        		<h:commandButton value="Login Now" action="#{credentials.login}" label="Log Me In!" title="Log Me In!" />  
+		        		<h:commandButton value="Login Now" action="#{identity.login}" 
+		        		oncomplete="document.location.href='/prototype/home.do'"
+		        		label="Log Me In!" title="Log Me In!" />  
 				    </h:panelGrid>
 				</h:form>
 			</h:panelGroup>

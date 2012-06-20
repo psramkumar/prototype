@@ -12,6 +12,10 @@
 	
 	</ui:define>
 	<ui:define name="body">
+		<ui:fragment rendered="#{identity.loggedIn}">
+		    <div>Currently logged in as: <b>#{identity.user.id}</b></div>
+		</ui:fragment>
+		
 		<p:tagCloud model="#{indexTagClouds.model}" /> 
 	</ui:define>
 	<ui:define name="footer">
