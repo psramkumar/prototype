@@ -19,44 +19,45 @@
 	<ui:define name="body">
 		<p:messages id="messageBox" autoUpdate="true" globalOnly="false"/>  
 		<h:form prependId="false" id="form">
-			<p:dataTable id="basic" var="user" paginator="true" rows="10"  
-			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
-			 rowsPerPageTemplate="5,10,15"  
-			 value="#{userEntityDAO.resultList}">
-				<p:column id="modelHeader">
+			<p:dataTable id="basic" var="user"  rows="10" 
+			 paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+			 rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"
+			 value="#{userEntityDAO.resultList}" >
+				<p:column id="modelHeader" sortBy="#{user.guid}" filterBy="#{user.guid}">
 					<f:facet name="header">UserId</f:facet>
 					<h:outputText value="#{user.guid}" />
 				</p:column>
 
-				<p:column>
+				<p:column sortBy="#{user.userName}" filterBy="#{user.userName}">
 					<f:facet name="header">UserName</f:facet>
 					<h:outputText value="#{user.userName}" />
 				</p:column>
 
-				<p:column>
+				<p:column sortBy="#{user.emailAddress}" filterBy="#{user.emailAddress}">
 					<f:facet name="header">Eamil Id</f:facet>
 					<h:outputText value="#{user.emailAddress}" />
 				</p:column>
 
-				<p:column>
+				<p:column sortBy="#{user.password}" filterBy="#{user.password}">
 					<f:facet name="header">Password</f:facet>
 					<h:outputText value="#{user.password}" />
 				</p:column>
 				<p:column style="text-align:center;">
 					<f:facet name="header">Action</f:facet>
+					 <p:commandButton id="selectButton" update=":form:display" oncomplete="userDetail.show()" icon="ui-icon-search" title="View">  
+	                     <f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />  
+	                </p:commandButton> 
 					<p:commandButton id="editButton" update=":form:editDisplay" oncomplete="editUserDetail.show()"  icon="ui-icon-pencil" title="Edit">
 						<f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />
 					</p:commandButton>
 					<p:commandButton id="deleteButton" action="#{userEntityDAO.removeUser(user.guid)}" oncomplete=":form:basic :messageBox" icon="ui-icon-circle-minus" title="Delete">
 						<f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />
 					</p:commandButton> 
-	                <p:commandButton id="selectButton" update=":form:display" oncomplete="userDetail.show()" icon="ui-icon-search" title="View">  
-	                     <f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />  
-	                </p:commandButton>  
 				</p:column>
+					
 			</p:dataTable>
 			<br clear="none"/>
-			<p:commandButton id="addButton" value="Add New" onclick="addUserDetail.show()" actionListener="#{userEntityDAO.cleanUser()}" type="button"/>
+			<p:commandButton id="addButton" value="Add New" icon="ui-icon-circle-plus" onclick="addUserDetail.show()" actionListener="#{userEntityDAO.cleanUser()}"/>
 			
 			<p:dialog header="User Information" widgetVar="userDetail" resizable="false" id="userOverlay"  
                 showEffect="fade" hideEffect="explode" modal="true">  
@@ -104,7 +105,12 @@
                 showEffect="fade" hideEffect="explode" modal="true">  
  
 		       <h:panelGrid id="editDisplay" columns="2" cellpadding="4" style="margin:0 auto;">  
-		 
+		 		
+		 			<f:facet name="header">  
+		               <h:outputText value="#{userEntityDAO.userProfile.guid}"/>
+		               <h:inputHidden value="#{userEntityDAO.userProfile.guid}" />
+		            </f:facet> 
+		 	
 		            <h:outputText value="User Name:" />  
 		            <p:inputText  value="#{userEntityDAO.userProfile.userName}" style="font-weight:bold"/>  
 		  
@@ -116,7 +122,7 @@
 		            
 		        </h:panelGrid>  
 		   		<div align="center">
-		   			<p:commandButton  action="#{userEntityDAO.updateUser()}" oncomplete="editUserDetail.hide();" update=":form:basic :messageBox" title="Submit" value="Submit"/>
+		   			<p:commandButton  action="#{userEntityDAO.updateUser(userEntityDAO.userProfile.guid)}" oncomplete="editUserDetail.hide();" update=":form:basic :messageBox" title="Submit" value="Submit"/>
 		   		</div>
 		    </p:dialog> 
 	
