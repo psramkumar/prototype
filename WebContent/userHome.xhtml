@@ -8,13 +8,18 @@
 	xmlns:a="http://richfaces.org/a4j" xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="head">
-
+	<h:outputStylesheet>
+		.ui-button-icon-only{
+			width:1em;
+			height:1em;
+		}
+	</h:outputStylesheet>
 	</ui:define>
 
 	<ui:define name="body">
+		<p:messages id="messageBox" autoUpdate="true" globalOnly="false"/>  
 		<h:form prependId="false" id="form">
-			<p:dataTable id="basic" var="user" 
-			 paginator="true" rows="10"  
+			<p:dataTable id="basic" var="user" paginator="true" rows="10"  
 			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
 			 rowsPerPageTemplate="5,10,15"  
 			 value="#{userEntityDAO.resultList}">
@@ -39,15 +44,19 @@
 				</p:column>
 				<p:column style="text-align:center;">
 					<f:facet name="header">Action</f:facet>
-					<h:commandButton action="home" image="/img/edit.gif" />
-					<h:commandButton action="home" image="/img/delete.gif" icon="/img/delete.gif"/> 
+					<p:commandButton id="editButton" update=":form:editDisplay" oncomplete="editUserDetail.show()"  icon="ui-icon-pencil" title="Edit">
+						<f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />
+					</p:commandButton>
+					<p:commandButton id="deleteButton" action="#{userEntityDAO.removeUser(user.guid)}" oncomplete=":form:basic :messageBox" icon="ui-icon-circle-minus" title="Delete">
+						<f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />
+					</p:commandButton> 
 	                <p:commandButton id="selectButton" update=":form:display" oncomplete="userDetail.show()" icon="ui-icon-search" title="View">  
 	                     <f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />  
 	                </p:commandButton>  
 				</p:column>
 			</p:dataTable>
 			<br clear="none"/>
-			<h:commandButton value="Add New" onclick="addUserDetail.show()"/>
+			<p:commandButton id="addButton" value="Add New" onclick="addUserDetail.show()" actionListener="#{userEntityDAO.cleanUser()}" type="button"/>
 			
 			<p:dialog header="User Information" widgetVar="userDetail" resizable="false" id="userOverlay"  
                 showEffect="fade" hideEffect="explode" modal="true">  
@@ -77,6 +86,26 @@
 		       <h:panelGrid id="addDisplay" columns="2" cellpadding="4" style="margin:0 auto;">  
 		 
 		            <h:outputText value="User Name:" />  
+		            <p:inputText  value="#{userEntityDAO.addUserProfile.userName}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Email Address" />  
+		            <p:inputText value="#{userEntityDAO.addUserProfile.emailAddress}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Password:" />  
+		            <p:inputText value="#{userEntityDAO.addUserProfile.password}" style="font-weight:bold"/>  
+		            
+		        </h:panelGrid>  
+		   		<div align="center">
+		   			<p:commandButton  action="#{userEntityDAO.addUser()}" oncomplete="addUserDetail.hide();" update=":form:basic :form:addDisplay :messageBox" title="Submit" value="Submit"/>
+		   		</div>
+		    </p:dialog>  
+		    
+		    <p:dialog header="User Information" widgetVar="editUserDetail" resizable="false" id="editUserOverlay"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+ 
+		       <h:panelGrid id="editDisplay" columns="2" cellpadding="4" style="margin:0 auto;">  
+		 
+		            <h:outputText value="User Name:" />  
 		            <p:inputText  value="#{userEntityDAO.userProfile.userName}" style="font-weight:bold"/>  
 		  
 		            <h:outputText value="Email Address" />  
@@ -85,12 +114,11 @@
 		            <h:outputText value="Password:" />  
 		            <p:inputText value="#{userEntityDAO.userProfile.password}" style="font-weight:bold"/>  
 		            
-		            <p:commandButton id="btnSubmit" title="Submit" value="Submit"/>
-		  			<p:commandButton id="btnCancel" title="Cancel" value="Cancel"/>
-		  			
 		        </h:panelGrid>  
-		  
-		    </p:dialog>  
+		   		<div align="center">
+		   			<p:commandButton  action="#{userEntityDAO.updateUser()}" oncomplete="editUserDetail.hide();" update=":form:basic :messageBox" title="Submit" value="Submit"/>
+		   		</div>
+		    </p:dialog> 
 	
 		</h:form>
 
