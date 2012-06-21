@@ -28,11 +28,20 @@ public class UserEntityDAO implements Serializable {
 	}
 	
 	@Getter @Setter private String ejbql;
-	@Getter @Setter private UserProfile userProfile = new UserProfile();
+	private UserProfile userProfile = new UserProfile();
 	
 	@SuppressWarnings("unchecked")
 	public List<UserProfile> getResultList(){
 		return em.createQuery(getEjbql()).getResultList();
 	}
 
+	public void setUserProfile(UserProfile up){
+		this.userProfile =up;
+		System.out.println("User Profile Setting "+userProfile);
+	}
+
+	public UserProfile getUserProfile() {
+		System.out.println("User Profile Setting "+userProfile );
+		return userProfile;
+	}
 }

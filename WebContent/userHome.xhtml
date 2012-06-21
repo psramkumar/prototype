@@ -12,8 +12,12 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<h:form prependId="false">
-			<p:dataTable id="basic" var="user" value="#{userEntityDAO.resultList}">
+		<h:form prependId="false" id="form">
+			<p:dataTable id="basic" var="user" 
+			 paginator="true" rows="10"  
+			 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+			 rowsPerPageTemplate="5,10,15"  
+			 value="#{userEntityDAO.resultList}">
 				<p:column id="modelHeader">
 					<f:facet name="header">UserId</f:facet>
 					<h:outputText value="#{user.guid}" />
@@ -35,12 +39,59 @@
 				</p:column>
 				<p:column style="text-align:center;">
 					<f:facet name="header">Action</f:facet>
-						<h:commandButton action="home" image="/img/edit.gif" />
-						<h:commandButton action="home" image="/img/delete.gif" />
+					<h:commandButton action="home" image="/img/edit.gif" />
+					<h:commandButton action="home" image="/img/delete.gif" icon="/img/delete.gif"/> 
+	                <p:commandButton id="selectButton" update=":form:display" oncomplete="userDetail.show()" icon="ui-icon-search" title="View">  
+	                     <f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />  
+	                </p:commandButton>  
 				</p:column>
 			</p:dataTable>
 			<br clear="none"/>
-			<h:commandButton action="home" value="Add New" />
+			<h:commandButton value="Add New" onclick="addUserDetail.show()"/>
+			
+			<p:dialog header="User Information" widgetVar="userDetail" resizable="false" id="userOverlay"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+ 
+		       <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+		 
+		            <f:facet name="header">  
+		               <h:outputText value="#{userEntityDAO.userProfile.guid}"/>
+		            </f:facet>  
+		  
+		            <h:outputText value="User Name:" />  
+		            <h:outputText value="#{userEntityDAO.userProfile.userName}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Email Address" />  
+		            <h:outputText value="#{userEntityDAO.userProfile.emailAddress}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Password:" />  
+		            <h:outputText value="#{userEntityDAO.userProfile.password}" style="font-weight:bold"/>  
+		  
+		        </h:panelGrid>  
+		  
+		    </p:dialog>  
+  			
+  			<p:dialog header="User Information" widgetVar="addUserDetail" resizable="false" id="addUserOverlay"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+ 
+		       <h:panelGrid id="addDisplay" columns="2" cellpadding="4" style="margin:0 auto;">  
+		 
+		            <h:outputText value="User Name:" />  
+		            <p:inputText  value="#{userEntityDAO.userProfile.userName}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Email Address" />  
+		            <p:inputText value="#{userEntityDAO.userProfile.emailAddress}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Password:" />  
+		            <p:inputText value="#{userEntityDAO.userProfile.password}" style="font-weight:bold"/>  
+		            
+		            <p:commandButton id="btnSubmit" title="Submit" value="Submit"/>
+		  			<p:commandButton id="btnCancel" title="Cancel" value="Cancel"/>
+		  			
+		        </h:panelGrid>  
+		  
+		    </p:dialog>  
+	
 		</h:form>
 
 	</ui:define>
