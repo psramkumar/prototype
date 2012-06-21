@@ -8,12 +8,6 @@
 	xmlns:a="http://richfaces.org/a4j" xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="head">
-	<h:outputStylesheet>
-		.ui-button-icon-only{
-			width:1em;
-			height:1em;
-		}
-	</h:outputStylesheet>
 	</ui:define>
 
 	<ui:define name="body">
@@ -44,20 +38,20 @@
 				</p:column>
 				<p:column style="text-align:center;">
 					<f:facet name="header">Action</f:facet>
-					 <p:commandButton id="selectButton" update=":form:display" oncomplete="userDetail.show()" icon="ui-icon-search" title="View">  
+					 <p:commandButton id="selectButton" update=":form:display" oncomplete="userDetail.show()" icon="ui-icon-search" title="View" style="width:20px; height:20px;">  
 	                     <f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />  
 	                </p:commandButton> 
-					<p:commandButton id="editButton" update=":form:editDisplay" oncomplete="editUserDetail.show()"  icon="ui-icon-pencil" title="Edit">
+					<p:commandButton id="editButton" update=":form:editDisplay" oncomplete="editUserDetail.show()"  icon="ui-icon-pencil" title="Edit" style ="width:20px; height:20px;">
 						<f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />
 					</p:commandButton>
-					<p:commandButton id="deleteButton" action="#{userEntityDAO.removeUser(user.guid)}" oncomplete=":form:basic :messageBox" icon="ui-icon-circle-minus" title="Delete">
+					<p:commandButton id="deleteButton" action="#{userEntityDAO.removeUser(user.guid)}" oncomplete=":form:basic :messageBox" icon="ui-icon-circle-minus" title="Delete" style="width:20px; height:20px;">
 						<f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />
 					</p:commandButton> 
 				</p:column>
 					
 			</p:dataTable>
 			<br clear="none"/>
-			<p:commandButton id="addButton" value="Add New" icon="ui-icon-circle-plus" onclick="addUserDetail.show()" actionListener="#{userEntityDAO.cleanUser()}"/>
+			<p:commandButton style="width:100px; height:30px;font-size:12px;" id="addButton" value="Add New" icon="ui-icon-circle-plus" onclick="addUserDetail.show()" actionListener="#{userEntityDAO.cleanUser()}"/>
 			
 			<p:dialog header="User Information" widgetVar="userDetail" resizable="false" id="userOverlay"  
                 showEffect="fade" hideEffect="explode" modal="true">  
