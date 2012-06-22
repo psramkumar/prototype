@@ -13,7 +13,11 @@
 	</ui:define>
 	<ui:define name="body">
 		<ui:fragment rendered="#{identity.loggedIn}">
-		    <div>Currently logged in as: <b>#{identity.user.id}</b></div>
+	        <p:dashboard id="userBoard">  
+		        <p:panel id="userPanel" header="#{identity.user.id}">  
+		            <h:outputText value="Welcome"/> <b>#{identity.user.id}</b> 
+		        </p:panel>
+	        </p:dashboard>
 		</ui:fragment>
 		
 		<p:tagCloud model="#{indexTagClouds.model}" /> 

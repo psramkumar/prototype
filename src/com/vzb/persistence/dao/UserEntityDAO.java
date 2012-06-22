@@ -70,15 +70,14 @@ public class UserEntityDAO implements Serializable {
 	} 
 
 	/** •Finally add the code to UserController to update a record */
-	public void updateUser(long id) {
+	public void updateUser() {
 		try {
-			System.out.println("userProfile : " +id +"---->"+ userProfile);
-			UserProfile userx = em.find(UserProfile.class, id);
+			System.out.println(userProfile);
+			UserProfile userx = em.find(UserProfile.class, userProfile.getGuid());
 			userx.setUserName(userProfile.getUserName());
 			userx.setPassword(userProfile.getPassword());
 			userx.setEmailAddress(userProfile.getEmailAddress());
 			em.flush();
-			System.out.println("userx : "+ userx);
 			setMessage(FacesMessage.SEVERITY_INFO, "User Profile Updated Successfully !");
 			cleanUser();
 		} catch (Exception e) {

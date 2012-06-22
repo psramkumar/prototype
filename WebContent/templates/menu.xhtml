@@ -15,16 +15,16 @@
 	<h:form id="menuform">
 		<rich:toolbar height="26px">
 			<rich:toolbarGroup location="left">
-				<h:commandButton action="home" value="Verizon.com" image="/img/verizon_small.gif" />
+				<h:commandButton action="home" value="Verizon.com" image="/img/logo_verizon.png" />
 				<rich:menuItem mode="ajax">
-					<h:commandButton action="home" image="/img/home_icon.png" />
-					<h:outputText value="Home"/>
+					<h:commandButton action="home" image="/img/icon_home.png" />
+					<h:outputText value="Home" style="color:white;"/>
 				</rich:menuItem>
 				<rich:dropDownMenu mode="ajax" label="Admin" title="Admin">
 					<f:facet name="label">
 						<h:panelGroup>
-							<h:graphicImage value="/img/icon_admin.png" alt="Admin"	height="26" />
-							<h:outputText value="Admin"/>
+							<h:graphicImage value="/img/icon_admin.png" alt="Admin" />
+							<h:outputText value="Admin" style="color:white;"/>
 						</h:panelGroup>
 					</f:facet>
 					<rich:menuItem submitMode="client"
@@ -45,13 +45,13 @@
 				<rich:menuItem mode="ajax" rendered="#{identity.loggedIn}"
 					action="#{identity.logout}"
 					oncomplete="document.location.href='/prototype/home.do'">
-					<h:graphicImage value="/img/Log-Out-icon.png" alt="Logout" height="26" />
-					<h:outputText value="Logout"/>
+					<h:graphicImage value="/img/icon_logout.png" alt="Logout" />
+					<h:outputText value="Logout" style="color:white;"/>
 				</rich:menuItem>
 				<rich:menuItem mode="ajax" rendered="#{not identity.loggedIn}"
 					onclick="document.location.href='/prototype/login.do'">
-					<h:graphicImage value="/img/1856665992.png" alt="Login" height="26" />
-					<h:outputText value="Login"/>
+					<h:graphicImage value="/img/icon_login.png" alt="Login" />
+					<h:outputText value="Login" style="color:white;"/>
 				</rich:menuItem>
 			</rich:toolbarGroup>
 		</rich:toolbar>

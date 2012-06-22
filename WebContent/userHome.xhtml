@@ -116,7 +116,7 @@
 		            
 		        </h:panelGrid>  
 		   		<div align="center">
-		   			<p:commandButton  action="#{userEntityDAO.updateUser(userEntityDAO.userProfile.guid)}" oncomplete="editUserDetail.hide();" update=":form:basic :messageBox" title="Submit" value="Submit"/>
+		   			<p:commandButton  action="#{userEntityDAO.updateUser()}" oncomplete="editUserDetail.hide();" update=":form:basic :messageBox" title="Submit" value="Submit"/>
 		   		</div>
 		    </p:dialog> 
 	
