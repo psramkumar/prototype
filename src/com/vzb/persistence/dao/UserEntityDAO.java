@@ -48,7 +48,7 @@ public class UserEntityDAO implements Serializable {
 			setMessage(FacesMessage.SEVERITY_INFO, "User Profile Added Successfully !");
 			cleanUser();
 		} catch (Exception e) {
-			setMessage(FacesMessage.SEVERITY_ERROR, "User Profile Add Failed :( E:"+e.getMessage());
+			setMessage(FacesMessage.SEVERITY_ERROR, "User Profile Add Failed :( ", e.getMessage());
 		} finally {
 			
 		}
@@ -62,7 +62,7 @@ public class UserEntityDAO implements Serializable {
 			setMessage(FacesMessage.SEVERITY_INFO, "User Profile Deleted Successfully !");
 			cleanUser();
 		} catch (Exception e) {
-			setMessage(FacesMessage.SEVERITY_ERROR,	"User Profile Remove Failed :( E:"+e.getMessage());
+			setMessage(FacesMessage.SEVERITY_ERROR,	"User Profile Remove Failed :(", e.getMessage());
 		} finally {
 			
 		}
@@ -78,10 +78,10 @@ public class UserEntityDAO implements Serializable {
 			userx.setPassword(userProfile.getPassword());
 			userx.setEmailAddress(userProfile.getEmailAddress());
 			em.flush();
-			setMessage(FacesMessage.SEVERITY_INFO, "User Profile Updated Successfully !");
+			setMessage(FacesMessage.SEVERITY_INFO, "User Profile Updated Successfully !","");
 			cleanUser();
 		} catch (Exception e) {
-			setMessage(FacesMessage.SEVERITY_ERROR,	"User Profile Updated Failed :( E:"+e.getMessage());
+			setMessage(FacesMessage.SEVERITY_ERROR,	"User Profile Updated Failed :( ", e.getMessage());
 		} finally {
 			
 		}
@@ -92,7 +92,13 @@ public class UserEntityDAO implements Serializable {
 		addUserProfile = new UserProfile();
 	}
 
-	private void setMessage(Severity severityInfo, String message) {
-		FacesContext.getCurrentInstance().addMessage("messageBox", new FacesMessage(severityInfo, message, message));
+	private void setMessage(Severity severityInfo, String ...messages) {
+		FacesMessage message = new FacesMessage();
+		message.setSeverity(severityInfo);
+		message.setSummary(messages[0]);
+		if(severityInfo==FacesMessage.SEVERITY_ERROR){
+			message.setDetail(messages[1]);
+		}
+		FacesContext.getCurrentInstance().addMessage("messageBox", message);
 	}
 }

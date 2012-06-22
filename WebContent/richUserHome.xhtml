@@ -1,0 +1,141 @@
+<ui:composition template="/templates/template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="head">
+	
+	</ui:define>
+	<ui:define name="body">
+		<p:messages id="messageBox" autoUpdate="true" globalOnly="false"/>  
+		<h:form  id="form">
+			<div align="center">
+			<h:outputScript>
+				.align_center{text-align:center; height: 25px;}
+				.align_center div{text-align:center; height: 25px;}
+				.rf-edt-c{border-left: 1px solid #C0C0C0 ! important; height: 25px !important;}
+				
+				#idAction div {border-left: 1px solid #C0C0C0 ! important; text-align:center; height: 25px ! important;}
+				#idAction {height: 25px !important;}
+			</h:outputScript>
+			<rich:extendedDataTable value="#{userEntityDAO.resultList}" var="user" id="basic" 
+			rows="20">
+				<rich:column styleClass="align_center">
+					<f:facet name="header">UserId</f:facet>
+					<h:outputText value="#{user.guid}" />
+				</rich:column>
+
+				<rich:column styleClass="align_center">
+					<f:facet name="header">UserName</f:facet>
+					<h:outputText value="#{user.userName}" />
+				</rich:column>
+
+				<rich:column styleClass="align_center">
+					<f:facet name="header">Eamil Id</f:facet>
+					<h:outputText value="#{user.emailAddress}" />
+				</rich:column>
+
+				<rich:column styleClass="align_center">
+					<f:facet name="header">Password</f:facet>
+					<h:outputText value="#{user.password}" />
+				</rich:column>
+				
+				<rich:column styleClass="rf-edt-c-idAction" id="idAction">
+					<f:facet name="header">Action</f:facet>
+					<div style="height: 25px; font-size: 14px; overflow: visible;">
+					 <p:commandButton id="selectButton" update=":form:display" oncomplete="userDetail.show()" icon="ui-icon-search" title="View" style="width:20px; height:20px;">  
+	                     <f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />  
+	                </p:commandButton> 
+					<p:commandButton id="editButton" update=":form:editDisplay" oncomplete="editUserDetail.show()"  icon="ui-icon-pencil" title="Edit" style ="width:20px; height:20px;">
+						<f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />
+					</p:commandButton>
+					<p:commandButton id="deleteButton" action="#{userEntityDAO.removeUser(user.guid)}" oncomplete=":form:basic :messageBox" icon="ui-icon-circle-minus" title="Delete" style="width:20px; height:20px;">
+						<f:setPropertyActionListener value="#{user}" target="#{userEntityDAO.userProfile}" />
+					</p:commandButton>
+					</div> 
+				</rich:column>
+			</rich:extendedDataTable>
+			<rich:dataScroller for=":form:basic" renderIfSinglePage="false" maxPages="5" fastControls="hide"/>
+			<br clear="none"/>
+			<p:commandButton style="width:100px; height:30px;font-size:12px;" id="addButton" value="Add New" icon="ui-icon-circle-plus" onclick="addUserDetail.show()" actionListener="#{userEntityDAO.cleanUser()}"/>
+			
+			</div>
+			
+			
+			<p:dialog header="User Information" widgetVar="userDetail" resizable="false" id="userOverlay"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+ 
+		       <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+		 
+		            <f:facet name="header">  
+		               <h:outputText value="#{userEntityDAO.userProfile.guid}"/>
+		            </f:facet>  
+		  
+		            <h:outputText value="User Name:" />  
+		            <h:outputText value="#{userEntityDAO.userProfile.userName}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Email Address" />  
+		            <h:outputText value="#{userEntityDAO.userProfile.emailAddress}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Password:" />  
+		            <h:outputText value="#{userEntityDAO.userProfile.password}" style="font-weight:bold"/>  
+		  
+		        </h:panelGrid>  
+		  
+		    </p:dialog>  
+  			
+  			<p:dialog header="User Information" widgetVar="addUserDetail" resizable="false" id="addUserOverlay"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+ 
+		       <h:panelGrid id="addDisplay" columns="2" cellpadding="4" style="margin:0 auto;">  
+		 
+		            <h:outputText value="User Name:" />  
+		            <p:inputText  value="#{userEntityDAO.addUserProfile.userName}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Email Address" />  
+		            <p:inputText value="#{userEntityDAO.addUserProfile.emailAddress}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Password:" />  
+		            <p:inputText value="#{userEntityDAO.addUserProfile.password}" style="font-weight:bold"/>  
+		            
+		        </h:panelGrid>  
+		   		<div align="center">
+		   			<p:commandButton  action="#{userEntityDAO.addUser()}" oncomplete="addUserDetail.hide();" update=":form:basic :form:addDisplay :messageBox" title="Submit" value="Submit"/>
+		   		</div>
+		    </p:dialog>  
+		    
+		    <p:dialog header="User Information" widgetVar="editUserDetail" resizable="false" id="editUserOverlay"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+ 
+		       <h:panelGrid id="editDisplay" columns="2" cellpadding="4" style="margin:0 auto;">  
+		 		
+		 			<f:facet name="header">  
+		               <h:outputText value="#{userEntityDAO.userProfile.guid}"/>
+		               <h:inputHidden value="#{userEntityDAO.userProfile.guid}" />
+		            </f:facet> 
+		 	
+		            <h:outputText value="User Name:" />  
+		            <p:inputText  value="#{userEntityDAO.userProfile.userName}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Email Address" />  
+		            <p:inputText value="#{userEntityDAO.userProfile.emailAddress}" style="font-weight:bold"/>  
+		  
+		            <h:outputText value="Password:" />  
+		            <p:inputText value="#{userEntityDAO.userProfile.password}" style="font-weight:bold"/>  
+		            
+		        </h:panelGrid>  
+		   		<div align="center">
+		   			<p:commandButton  action="#{userEntityDAO.updateUser()}" oncomplete="editUserDetail.hide();" update=":form:basic :messageBox" title="Submit" value="Submit"/>
+		   		</div>
+		    </p:dialog> 
+	
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="footer">
+
+	</ui:define>
+</ui:composition>
