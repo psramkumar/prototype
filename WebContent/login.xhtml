@@ -25,9 +25,7 @@
 				        <h:outputLabel for="password">Password:</h:outputLabel>
 				        <p:keyboard  id="password" value="#{credentials.password}" password="true" required="true" requiredMessage="Password is Required"/>
 		        		<h:outputText value="&nbsp;" />
-		        		<h:commandButton value="Login Now" action="#{identity.login}" 
-		        		oncomplete="document.location.href='/prototype/home.do'"
-		        		label="Log Me In!" title="Log Me In!" />  
+		        		<h:commandButton value="Login Now" action="#{identity.login}" oncomplete="document.location.href='/prototype/home.do'" label="Log Me In!" title="Log Me In!" />  
 				    </h:panelGrid>
 				</h:form>
 			</h:panelGroup>

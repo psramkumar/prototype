@@ -11,16 +11,40 @@
 	<ui:define name="head">
 	
 	</ui:define>
-	<ui:define name="body">
-		<ui:fragment rendered="#{identity.loggedIn}">
-	        <p:dashboard id="userBoard">  
-		        <p:panel id="userPanel" header="#{identity.user.id}">  
-		            <h:outputText value="Welcome"/> <b>#{identity.user.id}</b> 
-		        </p:panel>
-	        </p:dashboard>
-		</ui:fragment>
-		
-		<p:tagCloud model="#{indexTagClouds.model}" /> 
+	<ui:define name="body" >
+		<div>
+			<h:form id="form">
+			    <p:growl id="homeDashMessage" showDetail="true" />
+			   
+			    <p:dashboard id="board" model="#{indexTagClouds.dashModel}" style="align:center;">
+			        <p:ajax event="reorder" listener="#{indexTagClouds.handleReorder}" update="homeDashMessage" />
+			
+			        <p:panel id="sports" header="Sports" style="width:30em; height:20em" closable="true" menuTitle="Text">
+			            <h:outputText value="Sports Content" />
+			        </p:panel>
+			
+			        <p:panel id="finance" header="Finance" style="width:30em; height:20em">
+			            <h:outputText value="Finance Content" />
+			        </p:panel>
+			
+			        <p:panel id="lifestyle" header="Clouds" style="width:30em; height:20em; align:center;" >
+			            <p:tagCloud model="#{indexTagClouds.model}" style="width:20em; height:10em"/> 
+			        </p:panel>
+			
+			        <p:panel id="weather" header="Weather" style="width:30em; height:20em">
+			            <h:outputText value="Weather Content" />
+			        </p:panel>
+			
+			        <p:panel id="politics" header="User Inofrmation" style="width:30em; height:20em">
+			            <h:outputText value="Welcome"/> <b>#{identity.user.id}</b> 
+			        </p:panel>
+			         <p:panel id="events" header="News Evnents" style="width:30em; height:20em">
+			            <h:outputText value="Welcome"/> <b>#{identity.user.id}</b> 
+			        </p:panel>
+			    </p:dashboard>
+			
+			</h:form>
+		</div>
 	</ui:define>
 	<ui:define name="footer">
 	
