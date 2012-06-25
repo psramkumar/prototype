@@ -16,43 +16,32 @@
 		<rich:toolbar height="26px">
 			<rich:toolbarGroup location="left">
 				<h:commandButton action="home" value="Verizon.com" image="/img/logo_verizon.png" />
-				<rich:menuItem mode="ajax">
-					<h:commandButton action="home" image="/img/icon_home.png" />
-					<h:outputText value="Home" style="color:white;"/>
-				</rich:menuItem>
+				<rich:menuItem mode="ajax" onclick="document.location.href='home.do'"
+					icon="/img/icon_home.png" label="Home" title="Home"/>
 				<rich:dropDownMenu mode="ajax" label="Admin" title="Admin">
 					<f:facet name="label">
 						<h:panelGroup>
-							<h:graphicImage value="/img/icon_admin.png" alt="Admin" />
+							<h:graphicImage value="/img/icon_admin.png" styleClass="pic" height="16" width="16"/>
 							<h:outputText value="Admin" style="color:white;"/>
 						</h:panelGroup>
 					</f:facet>
-					<rich:menuItem submitMode="client"
+					<rich:menuItem submitMode="client" label="PrimeFaces UserList" rendered="#{identity.loggedIn}" 
 						onclick="document.location.href='userHome.do'"
-						rendered="#{identity.loggedIn}">
-						<h:outputText value="UserProfiles"/>
-					</rich:menuItem>
-					<rich:menuItem submitMode="client"
+						icon="/img/icon_primf.png" />
+					<rich:menuItem submitMode="client" label="RichFaces UserList" rendered="#{identity.loggedIn}"
 						onclick="document.location.href='richUserHome.do'"
-						rendered="#{identity.loggedIn}">
-						<h:outputText value="Jboss Solutions"/>
-					</rich:menuItem>
+						icon="/img/icon_richf.png" />
 
 				</rich:dropDownMenu>
 
 			</rich:toolbarGroup>
 			<rich:toolbarGroup location="right">Welcome! <b>#{identity.user.id}</b>
-				<rich:menuItem mode="ajax" rendered="#{identity.loggedIn}"
-					action="#{identity.logout}"
-					oncomplete="document.location.href='/prototype/home.do'">
-					<h:graphicImage value="/img/icon_logout.png" alt="Logout" />
-					<h:outputText value="Logout" style="color:white;"/>
-				</rich:menuItem>
-				<rich:menuItem mode="ajax" rendered="#{not identity.loggedIn}"
-					onclick="document.location.href='/prototype/login.do'">
-					<h:graphicImage value="/img/icon_login.png" alt="Login" />
-					<h:outputText value="Login" style="color:white;"/>
-				</rich:menuItem>
+				<rich:menuItem mode="ajax" rendered="#{identity.loggedIn}" 
+					action="#{identity.logout}" icon="/img/icon_logout.png"
+					oncomplete="document.location.href='home.do'" label="Logout" title="Logout" />
+				<rich:menuItem mode="ajax" rendered="#{not identity.loggedIn}" 
+				onclick="document.location.href='login.do'"
+				icon="/img/icon_login.png" label="Login" title="Login" />
 			</rich:toolbarGroup>
 		</rich:toolbar>
 
