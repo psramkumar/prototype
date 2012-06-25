@@ -53,7 +53,7 @@
 			<br clear="none"/>
 			<p:commandButton style="width:100px; height:30px;font-size:12px;" id="addButton" value="Add New" icon="ui-icon-circle-plus" onclick="addUserDetail.show()" actionListener="#{userEntityDAO.cleanUser()}"/>
 			
-			<p:dialog header="User Information" widgetVar="userDetail" resizable="false" id="userOverlay"  
+			<p:dialog header="View User Information " widgetVar="userDetail" resizable="false" id="userOverlay"  
                 showEffect="fade" hideEffect="explode" modal="true">  
  
 		       <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
@@ -75,7 +75,7 @@
 		  
 		    </p:dialog>  
   			
-  			<p:dialog header="User Information" widgetVar="addUserDetail" resizable="false" id="addUserOverlay"  
+  			<p:dialog header="Add User Information" widgetVar="addUserDetail" resizable="false" id="addUserOverlay"  
                 showEffect="fade" hideEffect="explode" modal="true">  
  
 		       <h:panelGrid id="addDisplay" columns="2" cellpadding="4" style="margin:0 auto;">  
@@ -95,7 +95,7 @@
 		   		</div>
 		    </p:dialog>  
 		    
-		    <p:dialog header="User Information" widgetVar="editUserDetail" resizable="false" id="editUserOverlay"  
+		    <p:dialog header="Edit User Information" widgetVar="editUserDetail" resizable="false" id="editUserOverlay"  
                 showEffect="fade" hideEffect="explode" modal="true">  
  
 		       <h:panelGrid id="editDisplay" columns="2" cellpadding="4" style="margin:0 auto;">  

@@ -1,3 +1,15 @@
+-- CREATE TABLE Script 
+CREATE TABLE `tbl_user_profile` (
+  `guid` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `email_address` varchar(80) NOT NULL,
+  `version` int(11) DEFAULT NULL,
+  PRIMARY KEY (`guid`),
+  UNIQUE KEY `guid_UNIQUE` (`guid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8$$
+
+--INSERT Sample DATA
 INSERT INTO test.tbl_user_profile (user_name, password, email_address) VALUES ('5d71a44b', 'pass', '5d71a44b@gmail.com');
 INSERT INTO test.tbl_user_profile (user_name, password, email_address) VALUES ('a3d02b18', 'pass', 'a3d02b18@gmail.com');
 INSERT INTO test.tbl_user_profile (user_name, password, email_address) VALUES ('462185e1', 'pass', '462185e1@gmail.com');
