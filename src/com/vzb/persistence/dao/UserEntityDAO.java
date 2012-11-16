@@ -24,7 +24,7 @@ public class UserEntityDAO implements Serializable {
 
 	private static final long serialVersionUID = -5092819821882631615L;
 
-	@PersistenceContext
+	@PersistenceContext(unitName="MySQLDS")
 	private EntityManager em;
 
 	public UserEntityDAO() {

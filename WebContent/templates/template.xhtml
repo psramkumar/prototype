@@ -9,12 +9,28 @@
 		<h:head>
 			<title>Prototype WebDevelopment</title>
 			<h:outputStylesheet name="/css/client.css" library="css"></h:outputStylesheet>
+			<h:outputStylesheet>
+			.breadcrumbs {
+			    color: #666666;
+			    font-size: 10px;
+			    margin: 0;
+			    padding: 5px 0 0 10px;
+			    text-align: left;
+			}
+			</h:outputStylesheet>
 			<ui:insert name="head" />
 		</h:head>
 		<h:body>
-			<div style="border: 1px solid;">
-				<div class="header" align="center">
+			<div style="border: 1px solid; background-color:#F2F2F2">
+				
+				<div id="globalHeader" style="height:50px; background-color:#FFFFFF;">
+					<ui:include src="globalHeader.xhtml"/>
+				</div>
+				<div id="globalNavigation" class="header" align="center"  style="height:35px; background-color:#FFFFFF;">
 					<ui:include src="menu.xhtml"/>
+				</div>
+				<div id="breadCrumbs"  style="height:22px; background-color:#FFFFFF;" >
+					<p class="breadcrumbs"><a title="Go to Intranet Design Style Guide home page" href="index.asp">Home</a> / <a title="Go to Design Elements Section Overview" href="designelements.asp">For Designers</a> / Layout Structure</p>
 				</div>
 					
 				<div class="body">

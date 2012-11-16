@@ -9,12 +9,13 @@
 		<!-- The <jar-file> element is necessary if you put the persistence.xml in the WAR and the classes in the JAR -->
 		<!-- <jar-file>../../vehicles.jar</jar-file> -->
 		<class>com.vzb.persistence.entity.UserProfile</class>
+		<class>com.vzb.persistence.entity.Shoutbox</class>
 		<exclude-unlisted-classes />
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.show_sql" value="false" />
-			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
 			<!-- <property name="jboss.entity.manager.factory.jndi.name" value="java:/MySQLDS"/> -->
 		</properties>
 	</persistence-unit>
